@@ -7,7 +7,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  * ETML
  * Author : Matthieu Joly
  * Date : 18.05.2015.
- * Summary :  main class for all run.
+ * Summary :  main class for server.
  */
 public class Server {
     private final int port;

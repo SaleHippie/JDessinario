@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * ETML
  * Author : Matthieu Joly
@@ -7,13 +9,22 @@
 
 
 public class JDessinario {
-    public static void main(String[] args) {
-        ClientForm window = new ClientForm();
+    private static ClientForm window;
+    private static Client client = new Client("localhost",8000);
+    private static String nickname;
 
-
+    public static void main(String[] args) throws IOException, InterruptedException {
+        window = new ClientForm();
         window.setVisible(true);
-
-
+        client.run();
     }
 
+    public void showMessageReceived(String msg) {
+        window.writeChat(msg);
+    }
+
+    public static void send(String msg){
+
+        client.channel.writeAndFlush("[" + nickname + "] " + msg + "\r\n");
+    }
 }

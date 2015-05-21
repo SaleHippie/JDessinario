@@ -16,18 +16,13 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
     private static final ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
 
-    /*public void handlerAdded( ChannelHandlerContext ctx) throws Exception{
-        Channel incoming = ctx.channel();
+    public void handlerAdded( ChannelHandlerContext ctx) throws Exception{
 
-        for (Channel channel : channels){
-            //channel.metadata();
-            channel.writeAndFlush("[SERVER]" + channel.metadata());
-        }
         channels.add(ctx.channel());
-    }*/
+    }
 
 
-    /*public void handlerRemoved( ChannelHandlerContext ctx) throws  Exception{
+    public void handlerRemoved( ChannelHandlerContext ctx) throws  Exception{
         Channel incoming = ctx.channel();
 
         for (Channel channel : channels){
@@ -35,7 +30,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
         }
         channels.remove(ctx.channel());
     }
-*/
+
     /*******************************************************
      * Write and flush the message recive to the other clients
      * Name :    channelRead0()
