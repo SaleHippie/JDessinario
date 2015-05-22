@@ -1,5 +1,3 @@
-import javafx.embed.swing.JFXPanel;
-
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -9,42 +7,40 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 /**
- * Created by jolyma on 08.05.2015.
+ * ETML
+ * Author : Matthieu Joly
+ * Date : 08.05.2015.
+ * Summary :  main class for all run.
  */
 public class ClientForm extends JFrame{
     private JPanel panelContainer;
+
+    // Left part (game)
     private JEditorPane drawPane;
     private JTextField txtAnswer;
     private JButton btnAnswer;
+    private JPanel panelAnswer;
+    private JPanel panelDraw;
+    private JLabel answerLabel;
+
+    //Right part (chat)
     private JTextPane chatMessagePane;
     private JTextArea messageText;
     private JButton btnSend;
-    private JPanel panelAnswer;
-    private JPanel panelDraw;
+
     private JPanel panelChat;
     private JPanel panelMessage;
-    private JLabel answerLabel;
-    private JFXPanel drawing;
+
     private boolean shiftPressed;
 
     public ClientForm() {
         super();
-
-       /*drawing = new JFXPanel();
-       panelDraw.add(drawing);*/
 
         panelDraw.add(new ScribbleDragAndDrop());
 
         setContentPane(panelContainer);
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        /*Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                initFX(drawing);
-            }
-        });*/
 
         /***********************************************
          * ActionListener btnAnswer
@@ -116,17 +112,16 @@ public class ClientForm extends JFrame{
     }
 
     /************************************
-     * Summury :    send the messages in chat
+     * Summary :    send the messages in chat
      * Name :       sendChat()
      * Param :      -
      * Return :     -
      **************************************/
     private void sendChat(){
-        //TODO implements it on network
 
         //Write th message in this client
         writeChat(messageText.getText());
-        //Send the message to the other clint
+        //Send the message to the other clients
         JDessinario.send(messageText.getText());
 
         // Clear the message text
@@ -134,7 +129,7 @@ public class ClientForm extends JFrame{
     }
 
     /************************************
-     * Summury :    send the answer and try to win
+     * Summary :    send the answer and try to win
      * Name :       sendAnswer()
      * Param :      -
      * Return :     -
@@ -144,24 +139,24 @@ public class ClientForm extends JFrame{
         //Write the answer in this client
         writeAnswer(txtAnswer.getText());
         //Send the answer to the other clients
-        //JDessinario.send(txtAnswer.getText());
+        JDessinario.sendAnswer(txtAnswer.getText());
 
         // Clear the answer text
         txtAnswer.setText(null);
     }
 
     /************************************
-     * Summury :    write the answer in the Label
+     * Summary :    write the answer in the Label
      * Name :       writeAnswer()
      * Param :      -
      * Return :     -
      **************************************/
-    private void writeAnswer(String answer){
+    public void writeAnswer(String answer){
         answerLabel.setText(answerLabel.getText() + " " + answer);
     }
 
     /************************************
-     * Summury :    write the messages in chat
+     * Summary :    write the messages in chat
      * Name :       writeChat()
      * Param :      -
      * Return :     -

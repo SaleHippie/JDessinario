@@ -9,19 +9,31 @@ import io.netty.util.concurrent.GlobalEventExecutor;
  * ETML
  * Author : Matthieu Joly
  * Date : 18.05.2015.
- * Summary :  main class for all run.
+ * Summary :  Server class to push message
  */
-public class ServerHandler extends SimpleChannelInboundHandler<String> {
+public class ServerHandler extends SimpleChannelInboundHandler<Object> {
 
     private static final ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
-
+    /*******************************************************
+     * Summary :    Connect the client to the channel
+     * Name :       handlerAdded()
+     * param :
+     *              ctx channel handler context get the channel source
+     * return :     -
+     ********************************************************/
     public void handlerAdded( ChannelHandlerContext ctx) throws Exception{
 
         channels.add(ctx.channel());
     }
 
-
+    /*******************************************************
+     * Summary :    Disconnect the client to the channel
+     * Name :       handlerRemoved()
+     * param :
+     *              ctx channel handler context get the channel source
+     * return :     -
+     ********************************************************/
     public void handlerRemoved( ChannelHandlerContext ctx) throws  Exception{
         Channel incoming = ctx.channel();
 
@@ -32,19 +44,20 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
     }
 
     /*******************************************************
-     * Write and flush the message recive to the other clients
-     * Name :    channelRead0()
+     * Summary :    Write and flush the message recive to the other clients
+     * Name :       channelRead0()
      * param :
-     *          ctx channel handler context get the channel source
-     *          msg String the text message to send
-     * return : -
+     *              ctx channel handler context get the channel source
+     *              msg String the text message to send
+     * return :     -
     ********************************************************/
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         Channel incoming = ctx.channel();
+
         for (Channel channel : channels){
             if( channel != incoming ){
-                channel.writeAndFlush( msg + "\n");
+                channel.writeAndFlush(msg);
             }
         }
     }
