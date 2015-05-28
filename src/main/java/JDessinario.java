@@ -9,8 +9,9 @@ import java.io.IOException;
 
 
 public class JDessinario {
-    private static ClientForm window;
+
     private static Client client = new Client("localhost",8000);
+    private static ClientForm window;
     private static String nickname;
 
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -21,6 +22,7 @@ public class JDessinario {
         //Open the window
         window = new ClientForm();
         window.setVisible(true);
+
         //Run the netty's thread
         client.run();
     }
@@ -51,7 +53,7 @@ public class JDessinario {
         Categories chat = new Categories();
 
         chat.setText("[" + nickname + "] " + msg);
-        chat.setType("chat");
+        chat.setCategories("chat");
 
         client.channel.writeAndFlush(chat);
     }
@@ -59,13 +61,28 @@ public class JDessinario {
     public static void sendAnswer(String msg){
         Categories answer = new Categories();
 
+        answer.setCategories("answer");
         answer.setText(msg);
-        answer.setType("answer");
 
         client.channel.writeAndFlush(answer);
     }
 
+    public static void sendDraw(float x, float y, String mode){
+        Categories draw = new Categories();
+
+        draw.setCategories("draw");
+        draw.setX(x);
+        draw.setY(y);
+        draw.setMode(mode);
+
+        client.channel.writeAndFlush(draw);
+    }
+
     public static void exit(){
         client.exitChannel = true;
+    }
+
+    public void showDrawReceived(float x, float y, String mode) {
+        window.drawReceived(x,y,mode);
     }
 }

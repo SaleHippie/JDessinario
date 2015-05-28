@@ -9,8 +9,10 @@ import java.io.Serializable;
 public class Categories implements Serializable{
 
     public String text;
-    public String Type;
-
+    public String categories;
+    public float x;
+    public float y;
+    public String mode;
 
     public String getText() {
         return text;
@@ -20,11 +22,35 @@ public class Categories implements Serializable{
         this.text = text;
     }
 
-    public String getType() {
-        return Type;
+    public String getCategories() {
+        return categories;
     }
 
-    public void setType(String type) {
-        this.Type = type;
+    public void setCategories(String categories) {
+        this.categories = categories;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
     }
 }

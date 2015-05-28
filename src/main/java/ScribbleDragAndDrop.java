@@ -27,18 +27,18 @@ import java.util.StringTokenizer;
 
 /**
  * This component can operate in two modes. In "draw mode", it allows the user
- * to scribble with the mouse. In "drag mode", it allows the user to drag
- * scribbles with the mouse. Regardless of the mode, it always allows scribbles
+ * to scribble with the graphics. In "drag mode", it allows the user to drag
+ * scribbles with the graphics. Regardless of the mode, it always allows scribbles
  * to be dropped on it from other applications.
  */
 public class ScribbleDragAndDrop extends JComponent implements
         DragGestureListener, // For recognizing the start of drags
         DragSourceListener, // For processing drag source events
         DropTargetListener, // For processing drop target events
-        MouseListener, // For processing mouse clicks
-        MouseMotionListener // For processing mouse drags
+        MouseListener, // For processing graphics clicks
+        MouseMotionListener // For processing graphics drags
 {
-    ArrayList scribbles = new ArrayList(); // A list of Scribbles to draw
+    public ArrayList scribbles = new ArrayList(); // A list of Scribbles to draw
 
     Scribble currentScribble; // The scribble in progress
 
@@ -56,6 +56,10 @@ public class ScribbleDragAndDrop extends JComponent implements
     static final Border normalBorder = new BevelBorder(BevelBorder.LOWERED);
 
     static final Border dropBorder = new BevelBorder(BevelBorder.RAISED);
+
+    private boolean Initialize = true;
+
+    private boolean isReceived = false;
 
     /** The constructor: set up drag-and-drop stuff */
     public ScribbleDragAndDrop() {
@@ -86,6 +90,7 @@ public class ScribbleDragAndDrop extends JComponent implements
      * The component draws itself by drawing each of the Scribble objects.
      */
     public void paintComponent(Graphics g) {
+
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(linestyle); // Specify wide lines
@@ -97,17 +102,31 @@ public class ScribbleDragAndDrop extends JComponent implements
         }
     }
 
-    public void setDragMode(boolean dragMode) {
+    public void drawReceived(float x, float y){
+        currentScribble = new Scribble();
+        scribbles.add(currentScribble);
+        currentScribble.moveto(x, y);
+        isReceived = true;
+    }
+
+    public void sendDraw(float x, float y){
+        if(!isReceived){
+            JDessinario.sendDraw(x, y, "new");
+        }
+        isReceived = false;
+    }
+
+ /*   public void setDragMode(boolean dragMode) {
         this.dragMode = dragMode;
     }
 
     public boolean getDragMode() {
         return dragMode;
-    }
+    }*/
 
     /**
      * This method, and the following four methods are from the MouseListener
-     * interface. If we're in drawing mode, this method handles mouse down
+     * interface. If we're in drawing mode, this method handles graphics down
      * events and starts a new scribble.
      */
     public void mousePressed(MouseEvent e) {
@@ -116,6 +135,18 @@ public class ScribbleDragAndDrop extends JComponent implements
         currentScribble = new Scribble();
         scribbles.add(currentScribble);
         currentScribble.moveto(e.getX(), e.getY());
+
+        //TODO implements it on network
+        sendDraw((float) e.getX(), (float) e.getY());
+    }
+
+    public void followDraw(float x, float y){
+        currentScribble.lineto(x, y);
+        repaint();
+    }
+
+    public void sendFollowDraw(float x, float y){
+        JDessinario.sendDraw(x, y, "follow");
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -140,6 +171,8 @@ public class ScribbleDragAndDrop extends JComponent implements
             return;
         currentScribble.lineto(e.getX(), e.getY());
         repaint();
+
+        sendFollowDraw((float) e.getX(), (float) e.getY());
     }
 
     public void mouseMoved(MouseEvent e) {
@@ -389,6 +422,7 @@ class Scribble implements Shape, Transferable, Serializable, Cloneable {
      * array to mark the beginning of a new polyline
      */
     public void moveto(double x, double y) {
+
         if (numPoints + 3 > points.length)
             reallocate();
         // Mark this as the beginning of a new line
@@ -685,4 +719,4 @@ class Scribble implements Shape, Transferable, Serializable, Cloneable {
         } else
             throw new UnsupportedFlavorException(flavor);
     }
-}   
+}

@@ -32,11 +32,11 @@ public class ClientForm extends JFrame{
     private JPanel panelMessage;
 
     private boolean shiftPressed;
-
+    private ScribbleDragAndDrop drawable = new ScribbleDragAndDrop();
     public ClientForm() {
         super();
 
-        panelDraw.add(new ScribbleDragAndDrop());
+        panelDraw.add(drawable);
 
         setContentPane(panelContainer);
         pack();
@@ -135,7 +135,6 @@ public class ClientForm extends JFrame{
      * Return :     -
      **************************************/
     private void sendAnswer(){
-        //TODO implements it on network
         //Write the answer in this client
         writeAnswer(txtAnswer.getText());
         //Send the answer to the other clients
@@ -172,5 +171,21 @@ public class ClientForm extends JFrame{
         } catch (BadLocationException e1) {
             e1.printStackTrace();
         }
+    }
+
+    public void drawReceived(float x, float y,String mode){
+        switch (mode){
+            case "new":
+                drawable.drawReceived(x,y);
+                break;
+            case "follow":
+                drawable.followDraw(x,y);
+                break;
+
+            default:
+                break;
+        }
+
+
     }
 }

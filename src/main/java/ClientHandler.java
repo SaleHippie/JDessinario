@@ -21,18 +21,21 @@ public class ClientHandler extends SimpleChannelInboundHandler<Categories>{
     protected void channelRead0(ChannelHandlerContext ctx, Categories msg) throws Exception {
         JDessinario main = new JDessinario();
 
+        //System.out.println( "Texte : " + msg.categories);
 
-        System.out.println( "Texte : " + msg.Type);
-
-        switch (msg.Type){
+        switch (msg.getCategories()){
             case "answer":
                 main.showAnswerReceived(msg.getText());
                 break;
             case "chat":
                 main.showMessageReceived(msg.getText());
                 break;
+            case "draw":
+                main.showDrawReceived(msg.getX(), msg.getY(), msg.getMode());
+                break;
 
             default:
+                //TODO implement incomplete packet recive
                 break;
         }
 
