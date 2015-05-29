@@ -1,3 +1,5 @@
+package joly.tpi.jdessinario;
+
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -11,7 +13,7 @@ import io.netty.util.concurrent.GlobalEventExecutor;
  * Date : 18.05.2015.
  * Summary :  Server class to push message
  */
-public class ServerHandler extends SimpleChannelInboundHandler<Categories> {
+public class ServerHandler extends SimpleChannelInboundHandler<Package> {
 
     private static final ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
@@ -48,11 +50,11 @@ public class ServerHandler extends SimpleChannelInboundHandler<Categories> {
      * Name :       channelRead0()
      * param :
      *              ctx channel handler context get the channel source
-     *              msg String the text message to send
+     *              msg String the text message to sendMessage
      * return :     -
     ********************************************************/
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Categories msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, Package msg) throws Exception {
         Channel incoming = ctx.channel();
 
         for (Channel channel : channels){

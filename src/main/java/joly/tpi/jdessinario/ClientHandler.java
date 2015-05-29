@@ -1,3 +1,5 @@
+package joly.tpi.jdessinario;
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -8,29 +10,27 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * Summary :  Client channel reader,
  * read the channel and show messages
  */
-public class ClientHandler extends SimpleChannelInboundHandler<Categories>{
+public class ClientHandler extends SimpleChannelInboundHandler<Package>{
     /************************************
      * Summary :    read the channel
      * Name :       channelRead0()
      * param :
      *              ctx channel handler context get the channel source
-     *              msg String the text message to send
+     *              msg String the text message to sendMessage
      * Return :     -
      **************************************/
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Categories msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, Package msg) throws Exception {
         JDessinario main = new JDessinario();
 
-        //System.out.println( "Texte : " + msg.categories);
-
         switch (msg.getCategories()){
-            case "answer":
+            case ANSWER:
                 main.showAnswerReceived(msg.getText());
                 break;
-            case "chat":
+            case CHAT:
                 main.showMessageReceived(msg.getText());
                 break;
-            case "draw":
+            case DRAW:
                 main.showDrawReceived(msg.getX(), msg.getY(), msg.getMode());
                 break;
 

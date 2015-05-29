@@ -1,3 +1,5 @@
+package joly.tpi.jdessinario;
+
 import java.io.IOException;
 
 /**
@@ -15,7 +17,7 @@ public class JDessinario {
     private static String nickname;
 
     public static void main(String[] args) throws IOException, InterruptedException {
-
+        //TODO pop-up at the openning
         //set the user's nickname
         nickname = "";
 
@@ -44,33 +46,33 @@ public class JDessinario {
 
     /************************************
      * Summary :    Send the string to the server
-     * Name :       send()
-     * Param :      msg : String contain the message to send
+     * Name :       sendMessage()
+     * Param :      msg : String contain the message to sendMessage
      * Return :     -
      **************************************/
-    public static void send(String msg){
+    public static void sendMessage(String msg){
 
-        Categories chat = new Categories();
+        Package chat = new Package();
 
         chat.setText("[" + nickname + "] " + msg);
-        chat.setCategories("chat");
+        chat.setCategories(CategoriesPackage.CHAT);
 
         client.channel.writeAndFlush(chat);
     }
 
     public static void sendAnswer(String msg){
-        Categories answer = new Categories();
+        Package answer = new Package();
 
-        answer.setCategories("answer");
+        answer.setCategories(CategoriesPackage.ANSWER);
         answer.setText(msg);
 
         client.channel.writeAndFlush(answer);
     }
 
     public static void sendDraw(float x, float y, String mode){
-        Categories draw = new Categories();
+        Package draw = new Package();
 
-        draw.setCategories("draw");
+        draw.setCategories(CategoriesPackage.DRAW);
         draw.setX(x);
         draw.setY(y);
         draw.setMode(mode);

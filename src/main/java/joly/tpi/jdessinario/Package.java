@@ -1,3 +1,5 @@
+package joly.tpi.jdessinario;
+
 import java.io.Serializable;
 
 /**
@@ -6,10 +8,10 @@ import java.io.Serializable;
  * Date : 21.05.2015.
  * Summary :  Client main class to run it
  */
-public class Categories implements Serializable{
+public class Package implements Serializable{
 
     public String text;
-    public String categories;
+    public CategoriesPackage categories;
     public float x;
     public float y;
     public String mode;
@@ -22,11 +24,11 @@ public class Categories implements Serializable{
         this.text = text;
     }
 
-    public String getCategories() {
+    public CategoriesPackage getCategories() {
         return categories;
     }
 
-    public void setCategories(String categories) {
+    public void setCategories(CategoriesPackage categories) {
         this.categories = categories;
     }
 

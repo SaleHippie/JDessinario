@@ -1,4 +1,4 @@
-/*
+package joly.tpi.jdessinario;/*
  * Copyright (c) 2000 David Flanagan.  All rights reserved.
  * This code is from the book Java Examples in a Nutshell, 2nd Edition.
  * It is provided AS-IS, WITHOUT ANY WARRANTY either expressed or implied.

@@ -1,3 +1,5 @@
+package joly.tpi.jdessinario;
+
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -89,7 +91,7 @@ public class ClientForm extends JFrame{
                 }*/
                //
 
-                //Catch the enter to send message
+                //Catch the enter to sendMessage message
                 if( e.getKeyChar() == KeyEvent.VK_ENTER ) {
                     //Consume the enter
                     messageText.setText(messageText.getText().substring(0,messageText.getText().length()-1));
@@ -103,7 +105,7 @@ public class ClientForm extends JFrame{
                 super.keyTyped(e);
 
 
-                //Catch the enter to send answer
+                //Catch the enter to sendMessage answer
                 if(e.getKeyChar() == KeyEvent.VK_ENTER ){
                     sendAnswer();
                 }
@@ -112,7 +114,7 @@ public class ClientForm extends JFrame{
     }
 
     /************************************
-     * Summary :    send the messages in chat
+     * Summary :    sendMessage the messages in chat
      * Name :       sendChat()
      * Param :      -
      * Return :     -
@@ -122,14 +124,14 @@ public class ClientForm extends JFrame{
         //Write th message in this client
         writeChat(messageText.getText());
         //Send the message to the other clients
-        JDessinario.send(messageText.getText());
+        JDessinario.sendMessage(messageText.getText());
 
         // Clear the message text
         messageText.setText(null);
     }
 
     /************************************
-     * Summary :    send the answer and try to win
+     * Summary :    sendMessage the answer and try to win
      * Name :       sendAnswer()
      * Param :      -
      * Return :     -

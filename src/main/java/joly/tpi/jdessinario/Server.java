@@ -1,3 +1,5 @@
+package joly.tpi.jdessinario;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -18,9 +20,14 @@ public class Server {
     public static void main(String[] args) throws Exception {
         new Server(8000).run();
     }
-    /*************************************
-     *
-     *************************************/
+
+    /************************************
+     * Summary :    run the server with parameter
+     *              and start the listen's thread
+     * Name :       run()
+     * Param :      -
+     * Return :     -
+     **************************************/
     public void run() throws InterruptedException {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
