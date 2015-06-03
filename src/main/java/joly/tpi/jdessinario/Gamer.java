@@ -10,7 +10,7 @@ public class Gamer {
 
     public String nickname;
     public boolean modeDraw;
-    public Team team;
+
 
     public String getNickname() {
         return nickname;
@@ -26,13 +26,5 @@ public class Gamer {
 
     public void setModeDraw(boolean modeDraw) {
         this.modeDraw = modeDraw;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
     }
 }

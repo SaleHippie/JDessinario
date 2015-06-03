@@ -35,7 +35,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Package>{
                 break;
 
             default:
-                //TODO implement incomplete packet recive
+                //TODO implement incomplete packet received
                 break;
         }
 

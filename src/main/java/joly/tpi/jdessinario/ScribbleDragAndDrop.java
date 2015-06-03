@@ -32,7 +32,7 @@ import java.util.StringTokenizer;
  * to be dropped on it from other applications.
  */
 public class ScribbleDragAndDrop extends JComponent implements
-        DragGestureListener, // For recognizing the start of drags
+        DragGestureListener, // For recognizing the startARound of drags
         DragSourceListener, // For processing drag source events
         DropTargetListener, // For processing drop target events
         MouseListener, // For processing graphics clicks
@@ -204,7 +204,7 @@ public class ScribbleDragAndDrop extends JComponent implements
             Scribble s = (Scribble) scribbles.get(i);
             if (s.intersects(r)) {
                 // The user started the drag on top of this scribble, so
-                // start to drag it.
+                // startARound to drag it.
 
                 // First, remember which scribble is being dragged, so we can
                 // delete it later (if this is a move rather than a copy)
@@ -243,10 +243,10 @@ public class ScribbleDragAndDrop extends JComponent implements
                     g.draw(dragScribble);
                     Point hotspot = new Point(-scribbleBox.x, -scribbleBox.y);
 
-                    // Now start dragging, using the image.
+                    // Now startARound dragging, using the image.
                     e.startDrag(cursor, dragImage, hotspot, dragScribble, this);
                 } else {
-                    // Or start the drag without an image
+                    // Or startARound the drag without an image
                     e.startDrag(cursor, dragScribble, this);
                 }
                 // After we've started dragging one scribble, stop looking

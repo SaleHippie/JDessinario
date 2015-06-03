@@ -16,10 +16,15 @@ public class JDessinario {
     private static ClientForm window;
     private static String nickname;
 
+    private static Team redTeam = new Team();
+    private Team blueTeam = new Team();
+
     public static void main(String[] args) throws IOException, InterruptedException {
-        //TODO pop-up at the openning
+
         //set the user's nickname
-        nickname = "";
+        Login login = new Login();
+        login.setVisible(true);
+        nickname = login.nickname.getText();
 
         //Open the window
         window = new ClientForm();
@@ -40,6 +45,12 @@ public class JDessinario {
         window.writeChat(msg);
     }
 
+    /************************************
+     * Summary :    relay the answers to the view(window)
+     * Name :       showAnswerReceived()
+     * Param :      msg : String contain the answers
+     * Return :     -
+     **************************************/
     public void showAnswerReceived(String msg) {
         window.writeAnswer(msg);
     }
@@ -47,7 +58,7 @@ public class JDessinario {
     /************************************
      * Summary :    Send the string to the server
      * Name :       sendMessage()
-     * Param :      msg : String contain the message to sendMessage
+     * Param :      msg : String contain the message to send
      * Return :     -
      **************************************/
     public static void sendMessage(String msg){
@@ -60,6 +71,12 @@ public class JDessinario {
         client.channel.writeAndFlush(chat);
     }
 
+    /************************************
+     * Summary :    Send the string to the server
+     * Name :       sendAnswer()
+     * Param :      msg : String contain the message to send
+     * Return :     -
+     **************************************/
     public static void sendAnswer(String msg){
         Package answer = new Package();
 
@@ -69,6 +86,14 @@ public class JDessinario {
         client.channel.writeAndFlush(answer);
     }
 
+    /************************************
+     * Summary :    Send the string to the server
+     * Name :       sendDraw()
+     * Param :      x : Float contain the coordinated to send
+     *              y : Float contain the coordinated to send
+     *              mode : String the drawing mode to new trace or not
+     * Return :     -
+     **************************************/
     public static void sendDraw(float x, float y, String mode){
         Package draw = new Package();
 
@@ -80,11 +105,48 @@ public class JDessinario {
         client.channel.writeAndFlush(draw);
     }
 
+    /************************************
+     * Summary :    Exit the application
+     * Name :       exit()
+     * Param :      -
+     * Return :     -
+     **************************************/
     public static void exit(){
         client.exitChannel = true;
     }
 
+    /************************************
+     * @Summary :    relay the draw to the view(window)
+     * @Name :       showDrawReceived()
+     * @Param :      x : Float contain the coordinated to send
+     *               y : Float contain the coordinated to send
+     *               mode : String the drawing mode to new trace or not
+     * @Return :     -
+     **************************************/
     public void showDrawReceived(float x, float y, String mode) {
         window.drawReceived(x,y,mode);
+    }
+
+    public static void showResult() {
+
+    }
+
+ /*   public static void getDrawers(String teamColor){
+
+        switch (teamColor){
+            case "red":
+                redTeam.getPlayers();
+                break;
+            case "blue":
+                break;
+
+            default:
+                //TODO catch the exception
+                break;
+        }
+    }*/
+
+    private void initializeTeam(){
+
     }
 }

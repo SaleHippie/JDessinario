@@ -1,6 +1,8 @@
 package joly.tpi.jdessinario;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * ETML
@@ -14,6 +16,7 @@ public class Game {
     public int      nbTurn;
     public String   Drawer;
     public String   GuessTeamColor;
+    public String   wordToDraw;
 
     public boolean isModeClassic() {
         return modeClassic;
@@ -47,18 +50,57 @@ public class Game {
         GuessTeamColor = guessTeamColor;
     }
 
+    public String getWordToDraw() {
+        return wordToDraw;
+    }
+
+    public void setWordToDraw(String wordToDraw) {
+        this.wordToDraw = wordToDraw;
+    }
+
     /************************************
-     * Summary :    start a game
-     * Name :       start()
+     * Summary :    startARound a game
+     * Name :       startARound()
      * Param :      -
      * Return :     -
      **************************************/
-    public void start(Drawer drawer, ArrayList<String> players){
+    public void startARound(Drawer drawer, ArrayList<String> players, ArrayList<String> words){
         this.nbTurn --;
-        //TODO assign the drawer
         drawer.whoDraw(players);
 
-        //TODO get the word
-        //TODO
+        //get the word to draw
+        Random rand = new Random();
+
+        int index = rand.nextInt(words.size());
+        this.wordToDraw = words.get(index);
+        //TODO assign role of players
+    }
+
+    public void checkAnswer(String answerToCheck){
+
+        String word = this.wordToDraw.toLowerCase();
+        answerToCheck = answerToCheck.toLowerCase();
+
+        //Accent insensitive
+        word =  Normalizer.normalize(word, Normalizer.Form.NFKD);
+        word = word.replaceAll("[^\\p{ASCII}]", "");
+
+        answerToCheck = Normalizer.normalize(answerToCheck, Normalizer.Form.NFKD);
+        answerToCheck = answerToCheck.replaceAll("[^\\p{ASCII}]", "");
+
+        if( answerToCheck == word ){
+
+            end();
+        }
+    }
+
+    private void end(){
+        if( nbTurn > 0){
+            // start a round
+            //startARound();
+        }
+        else {
+            JDessinario.showResult();
+        }
     }
 }

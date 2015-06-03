@@ -1,5 +1,7 @@
 package joly.tpi.jdessinario;
 
+import java.util.ArrayList;
+
 /**
  * ETML
  * Author : Matthieu Joly
@@ -11,7 +13,7 @@ public class Team {
 
     public String color;
     public int score;
-
+    public ArrayList<String> Players;
     public String getColor() {
         return color;
     }
@@ -28,5 +30,11 @@ public class Team {
         this.score = score;
     }
 
+    public ArrayList<String> getPlayers() {
+        return Players;
+    }
 
+    public void setPlayers(ArrayList<String> players) {
+        Players = players;
+    }
 }
