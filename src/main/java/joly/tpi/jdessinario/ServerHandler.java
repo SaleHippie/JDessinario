@@ -13,7 +13,7 @@ import io.netty.util.concurrent.GlobalEventExecutor;
  * Date : 18.05.2015.
  * Summary :  Server class to push message
  */
-public class ServerHandler extends SimpleChannelInboundHandler<Package> {
+public class ServerHandler extends SimpleChannelInboundHandler<Object> {
 
     private static final ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
@@ -54,15 +54,12 @@ public class ServerHandler extends SimpleChannelInboundHandler<Package> {
      * return :     -
     ********************************************************/
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Package msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         Channel incoming = ctx.channel();
 
         for (Channel channel : channels){
             if( channel != incoming ){
                 channel.writeAndFlush(msg);
-                //TODO -> OBject + delete section
-                // debug
-                System.out.print(msg.categories);
             }
         }
     }

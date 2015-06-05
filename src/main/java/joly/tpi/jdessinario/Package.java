@@ -15,6 +15,7 @@ public class Package implements Serializable{
     public float x;
     public float y;
     public String mode;
+    public Game game;
 
     public String getText() {
         return text;
@@ -54,5 +55,13 @@ public class Package implements Serializable{
 
     public void setMode(String mode) {
         this.mode = mode;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 }

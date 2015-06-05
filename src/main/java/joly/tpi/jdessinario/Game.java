@@ -1,8 +1,7 @@
 package joly.tpi.jdessinario;
 
+import java.io.Serializable;
 import java.text.Normalizer;
-import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * ETML
@@ -10,11 +9,10 @@ import java.util.Random;
  * Date : 28.05.2015.
  * Summary :  Contain game parameters
  */
-public class Game {
+public class Game implements Serializable{
 
     public boolean  modeClassic;
-    public int      nbTurn;
-    public String   Drawer;
+    public String   drawer;
     public String   GuessTeamColor;
     public String   wordToDraw;
 
@@ -26,20 +24,12 @@ public class Game {
         this.modeClassic = modeClassic;
     }
 
-    public int getNbTurn() {
-        return nbTurn;
-    }
-
-    public void setNbTurn(int nbTurn) {
-        this.nbTurn = nbTurn;
-    }
-
     public String getDrawer() {
-        return Drawer;
+        return drawer;
     }
 
     public void setDrawer(String drawer) {
-        Drawer = drawer;
+        this.drawer = drawer;
     }
 
     public String getGuessTeamColor() {
@@ -64,16 +54,16 @@ public class Game {
      * Param :      -
      * Return :     -
      **************************************/
-    public void startARound(Drawer drawer, ArrayList<String> players, ArrayList<String> words){
-        this.nbTurn --;
-        drawer.whoDraw(players);
+    public void startARound(String nickname){
 
-        //get the word to draw
-        Random rand = new Random();
+        //assign role of players
+        if(this.drawer == nickname){
+            //TODO change the answer panel to write the  word
+        }
+        else{
+            //TODO block the drawing pane and notify client
+        }
 
-        int index = rand.nextInt(words.size());
-        this.wordToDraw = words.get(index);
-        //TODO assign role of players
     }
 
     public void checkAnswer(String answerToCheck){
@@ -95,12 +85,13 @@ public class Game {
     }
 
     private void end(){
-        if( nbTurn > 0){
+        //TODO call the end controller of first client
+        /*if( nbTurn > 0){
             // start a round
             //startARound();
         }
         else {
             JDessinario.showResult();
-        }
+        }*/
     }
 }

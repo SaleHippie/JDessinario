@@ -6,5 +6,6 @@ package joly.tpi.jdessinario;
 public enum CategoriesPackage {
     ANSWER,
     CHAT,
-    DRAW
+    DRAW,
+    GAME
 }

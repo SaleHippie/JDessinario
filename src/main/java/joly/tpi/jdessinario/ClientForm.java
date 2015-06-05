@@ -3,6 +3,7 @@ package joly.tpi.jdessinario;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -62,6 +63,7 @@ public class ClientForm extends JFrame{
         btnSend.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JDessinario.showWordToDraw("asdf");
                 sendChat();
             }
         });
@@ -189,5 +191,17 @@ public class ClientForm extends JFrame{
         }
 
 
+    }
+
+    public void showTheWordToDraw(String draw){
+        panelAnswer.removeAll();
+
+        JLabel word = new JLabel();
+
+        word.setText("Vous devez dessiner : " + draw);
+        System.out.println(word.getText());
+        panelAnswer.add(word, BorderLayout.CENTER);
+
+        super.pack();
     }
 }

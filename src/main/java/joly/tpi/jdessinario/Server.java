@@ -5,6 +5,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
+import java.net.BindException;
+
 /**
  * ETML
  * Author : Matthieu Joly
@@ -28,7 +30,7 @@ public class Server {
      * Param :      -
      * Return :     -
      **************************************/
-    public void run() throws InterruptedException {
+    public void run() throws InterruptedException, BindException {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {

@@ -35,33 +35,23 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <grid id="fec1a" binding="panelAnswer" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                    <margin top="5" left="5" bottom="0" right="5"/>
+                  <grid id="fec1a" binding="panelAnswer" layout-manager="BorderLayout" hgap="0" vgap="0">
                     <constraints border-constraint="North"/>
                     <properties/>
                     <border type="none"/>
                     <children>
                       <component id="fbe9e" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
+                        <constraints border-constraint="West"/>
                         <properties>
                           <text value="Réponse"/>
                         </properties>
                       </component>
                       <component id="75ad0" class="javax.swing.JTextField" binding="txtAnswer">
-                        <constraints>
-                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="7" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                            <preferred-size width="150" height="-1"/>
-                            <maximum-size width="200" height="-1"/>
-                          </grid>
-                        </constraints>
+                        <constraints border-constraint="Center"/>
                         <properties/>
                       </component>
                       <component id="678b0" class="javax.swing.JButton" binding="btnAnswer">
-                        <constraints>
-                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                        </constraints>
+                        <constraints border-constraint="East"/>
                         <properties>
                           <text value="Répondre"/>
                         </properties>
