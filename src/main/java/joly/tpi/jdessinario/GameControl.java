@@ -10,6 +10,7 @@ public class GameControl {
     Team redTeam = new Team();
     Team blueTeam = new Team();
     public int nbTurn;
+    public String mode;
 
     public int getNbTurn() {
         return nbTurn;
@@ -19,9 +20,17 @@ public class GameControl {
         this.nbTurn = nbTurn;
     }
 
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
     public void initializeGame(String mode){
         Game game = new Game();
-        ArrayList<String> drawers = null;
+        ArrayList<String> drawers = new ArrayList<>();
 
         redTeam.setColor("red");
         blueTeam.setColor("blue");

@@ -4,13 +4,11 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class InitializeGameForm extends JDialog {
+public class WaitPlayer extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
-    public JComboBox modeList;
-    public JSpinner nbTurn;
 
-    public InitializeGameForm() {
+    public WaitPlayer() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);

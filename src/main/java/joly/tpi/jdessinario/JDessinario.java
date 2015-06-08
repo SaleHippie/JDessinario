@@ -19,12 +19,13 @@ public class JDessinario {
     public static ServerThread thread;
 
     private static Team redTeam = new Team();
-    private Team blueTeam = new Team();
+    private static Team blueTeam = new Team();
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
         //set the user's nickname
         Login login = new Login();
+        login.pack();
         login.setVisible(true);
         nickname = login.nickname.getText();
 
@@ -38,12 +39,16 @@ public class JDessinario {
                 openInitializeGameForm(newGame);
 
                 i= (int) newGame.nbTurn.getValue();
-                int x = i%2;
             }
 
             GameControl gameControl = new GameControl();
 
-          //  gameControl.setNbTurn((int) newGame.nbTurn.getValue());
+            gameControl.setNbTurn((int) newGame.nbTurn.getValue());
+            gameControl.setMode(newGame.modeList.getSelectedItem().toString());
+
+            WaitPlayer waitPlayer = new WaitPlayer();
+            waitPlayer.pack();
+            waitPlayer.setVisible(true);
         }
 
         //Open the window
@@ -51,8 +56,11 @@ public class JDessinario {
         window.setVisible(true);
 
         //Run the netty's thread
-        client.run();
-
+        ClientThread cThread = new ClientThread();
+        cThread.run(client);
+       //client.run();
+        System.out.print("It's work");
+        //Thread blocked until the end of connection
     }
 
     private static void openInitializeGameForm(InitializeGameForm gameForm) {

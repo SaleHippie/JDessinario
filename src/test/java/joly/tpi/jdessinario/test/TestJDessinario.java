@@ -1,5 +1,6 @@
 package joly.tpi.jdessinario.test;
 
+import joly.tpi.jdessinario.JDessinario;
 import org.junit.Test;
 
 /**
@@ -8,7 +9,11 @@ import org.junit.Test;
 public class TestJDessinario {
 
     @Test
-    public void test(){
+    public void testJDessinario(){
+        JDessinario testJDessinario = new JDessinario();
 
+      /*  testJDessinario.showAnswerReceived("");
+        testJDessinario.showDrawReceived(2,4,"test");
+        testJDessinario.showAnswerReceived("");*/
     }
 }

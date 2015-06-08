@@ -19,10 +19,6 @@ public class Server {
         this.port = port;
     }
 
-    public static void main(String[] args) throws Exception {
-        new Server(8000).run();
-    }
-
     /************************************
      * Summary :    run the server with parameter
      *              and start the listen's thread
